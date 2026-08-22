@@ -1,7 +1,13 @@
 <?php
 
-test('returns a successful response', function () {
-    $response = $this->get(route('home'));
+use App\Http\Middleware\EnsureGuestHasVerified;
 
-    $response->assertOk();
+test('the home page sends unverified visitors to the gate', function () {
+    $this->get(route('home'))->assertRedirect(route('wishlist.verify'));
+});
+
+test('returns a successful response', function () {
+    $this->withCookie(EnsureGuestHasVerified::COOKIE, '1')
+        ->get(route('home'))
+        ->assertOk();
 });

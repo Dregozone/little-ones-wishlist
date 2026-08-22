@@ -26,6 +26,49 @@
     --color-accent: var(--color-neutral-800);
     --color-accent-content: var(--color-neutral-800);
     --color-accent-foreground: var(--color-white);
+
+    /* --- Oat & Sage -------------------------------------------------------
+       Gender-neutral palette for the public wishlist. Warm oat paper ground,
+       sage as the lead colour, terracotta as a sparing accent. */
+
+    --color-oat-50: #FDFBF8;
+    --color-oat-100: #FBF8F3;
+    --color-oat-200: #F4EEE4;
+    --color-oat-300: #E9E0D1;
+    --color-oat-400: #D6C9B4;
+    --color-oat-500: #A8A096;
+    --color-oat-600: #7A7267;
+    --color-oat-700: #574F45;
+    --color-oat-800: #3A342C;
+    --color-oat-900: #2C2A26;
+    --color-oat-950: #1A1815;
+
+    --color-sage-50: #F1F4F1;
+    --color-sage-100: #DFE6E0;
+    --color-sage-200: #C2CFC5;
+    --color-sage-300: #9DB0A2;
+    --color-sage-400: #7B9182;
+    --color-sage-500: #5F7365;
+    --color-sage-600: #4C5C51;
+    --color-sage-700: #3C4940;
+    --color-sage-800: #2E3832;
+    --color-sage-900: #232A25;
+
+    --color-clay-400: #D49A80;
+    --color-clay-500: #C4785C;
+    --color-clay-600: #A55F45;
+
+    --color-dusk-300: #A3AFC4;
+    --color-dusk-400: #8B98B0;
+    --color-dusk-500: #74839E;
+    --color-dusk-600: #5B6880;
+    --color-dusk-700: #465067;
+
+    /* Status colours. Never used on their own: every state also carries an icon
+       and a written label, so the list is readable without colour vision. */
+    --color-status-available: var(--color-oat-500);
+    --color-status-taken: var(--color-dusk-500);
+    --color-status-yours: var(--color-sage-500);
 }
 
 @layer theme {
@@ -33,6 +76,14 @@
         --color-accent: var(--color-white);
         --color-accent-content: var(--color-white);
         --color-accent-foreground: var(--color-neutral-800);
+    }
+
+    /* On the espresso ground the mid-tone status colours lose contrast, so each
+       one steps up a shade or two rather than being reused as-is. */
+    .dark {
+        --color-status-available: var(--color-oat-400);
+        --color-status-taken: var(--color-dusk-300);
+        --color-status-yours: var(--color-sage-300);
     }
 }
 
@@ -64,3 +115,167 @@ select:focus[data-flux-control] {
 /* \[:where(&)\]:size-4 {
     @apply size-4;
 } */
+
+/* ---------------------------------------------------------------------------
+   Wishlist motion.
+
+   Every animation here is opt-in via prefers-reduced-motion. Guests who ask
+   their system for less movement get the same final states with none of the
+   travel, rather than a degraded page.
+   --------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    @keyframes wl-rise {
+        from {
+            opacity: 0;
+            transform: translateY(0.75rem) scale(0.985);
+        }
+
+        to {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    @keyframes wl-bloom {
+        0% {
+            box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-sage-500) 55%, transparent);
+        }
+
+        100% {
+            box-shadow: 0 0 0 1.25rem color-mix(in oklab, var(--color-sage-500) 0%, transparent);
+        }
+    }
+
+    @keyframes wl-flash {
+        0%, 45% {
+            background-color: color-mix(in oklab, var(--color-sage-400) 32%, transparent);
+        }
+
+        100% {
+            background-color: transparent;
+        }
+    }
+
+    .wl-rise {
+        animation: wl-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .wl-bloom {
+        animation: wl-bloom 0.6s ease-out;
+    }
+
+    .wl-flash {
+        animation: wl-flash 1.1s ease-out;
+    }
+
+    .wl-transition {
+        transition:
+            border-color 0.3s ease,
+            background-color 0.3s ease,
+            box-shadow 0.3s ease,
+            transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .wl-progress-fill {
+        transition: width 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+}
+
+/* ---------------------------------------------------------------------------
+   Dual-handle price slider.
+
+   Built from two real <input type="range"> elements stacked on top of one
+   another, so keyboard operation, screen reader announcements and the platform
+   touch behaviour are the browser's rather than ours to reimplement. The track
+   is painted by the wrapper; the inputs contribute only their thumbs.
+   --------------------------------------------------------------------------- */
+
+.wl-range {
+    position: relative;
+    height: 2.75rem;
+}
+
+.wl-range input[type='range'] {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline: 0;
+    width: 100%;
+    height: 2.75rem;
+    margin: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    appearance: none;
+    pointer-events: none;
+}
+
+.wl-range input[type='range']:focus-visible {
+    outline: none;
+}
+
+.wl-range input[type='range']::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid var(--color-oat-100);
+    border-radius: 9999px;
+    background: var(--color-sage-500);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+    cursor: grab;
+    pointer-events: auto;
+}
+
+.wl-range input[type='range']::-moz-range-thumb {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid var(--color-oat-100);
+    border-radius: 9999px;
+    background: var(--color-sage-500);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.25);
+    cursor: grab;
+    pointer-events: auto;
+}
+
+.wl-range input[type='range']:focus-visible::-webkit-slider-thumb {
+    outline: 2px solid var(--color-sage-600);
+    outline-offset: 2px;
+}
+
+.wl-range input[type='range']:focus-visible::-moz-range-thumb {
+    outline: 2px solid var(--color-sage-600);
+    outline-offset: 2px;
+}
+
+.dark .wl-range input[type='range']::-webkit-slider-thumb,
+.dark .wl-range input[type='range']::-moz-range-thumb {
+    border-color: var(--color-oat-950);
+    background: var(--color-sage-300);
+}
+
+/* Hide the native track entirely; the wrapper draws it instead. */
+.wl-range input[type='range']::-webkit-slider-runnable-track,
+.wl-range input[type='range']::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Public wishlist accent.
+
+   Flux derives its primary buttons, focus rings and selection colours from the
+   accent tokens. Scoping an override to the public shell lets the guest-facing
+   pages wear sage while the authenticated admin keeps the kit's neutral accent.
+   --------------------------------------------------------------------------- */
+
+.wl-theme {
+    --color-accent: var(--color-sage-600);
+    --color-accent-content: var(--color-sage-700);
+    --color-accent-foreground: var(--color-white);
+}
+
+.dark .wl-theme,
+.wl-theme:where(.dark, .dark *) {
+    --color-accent: var(--color-sage-300);
+    --color-accent-content: var(--color-sage-200);
+    --color-accent-foreground: var(--color-sage-900);
+}
