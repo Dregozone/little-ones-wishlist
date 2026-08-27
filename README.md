@@ -553,8 +553,8 @@ signup, no surveillance" character of the app.
    you verified it. Screenshots or a short clip are very welcome for UI changes.
 9. **Respond to review.** Push follow-up commits rather than force-pushing over the discussion.
 
-Note: the CI workflow runs on every pull request, and on pushes to `main`. Since the default
-branch is `master`, the pull request run is the one that gates your change.
+Note: the CI workflow runs on every pull request and on pushes to `master`, so your change is
+gated either way.
 
 ### Coding conventions
 
