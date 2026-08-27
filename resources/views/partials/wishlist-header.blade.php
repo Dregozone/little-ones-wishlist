@@ -22,18 +22,23 @@
         class="wl-transition rounded-2xl border border-oat-200 bg-oat-50/85 p-4 shadow-sm shadow-oat-900/5 backdrop-blur-md sm:p-6 dark:border-oat-800 dark:bg-oat-900/85 dark:shadow-black/30"
         :class="condensed ? 'sm:p-4' : ''"
     >
-        <div class="wl-transition overflow-hidden" :class="condensed ? 'max-h-0 opacity-0 sm:max-h-0' : 'max-h-40 opacity-100'">
-            <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-sage-700 dark:text-sage-300">
-                {{ __('Baby Learmonth') }}
-            </p>
+        <div class="flex items-start justify-between gap-3">
+            <div class="wl-transition overflow-hidden" :class="condensed ? 'max-h-0 opacity-0 sm:max-h-0' : 'max-h-40 opacity-100'">
+                <p class="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-sage-700 dark:text-sage-300">
+                    {{ __('Baby Learmonth') }}
+                </p>
 
-            <flux:heading size="xl" level="1" class="mt-1 text-oat-900 dark:text-oat-50">
-                {{ __('The Wish List') }}
-            </flux:heading>
+                <flux:heading size="xl" level="1" class="mt-1 text-oat-900 dark:text-oat-50">
+                    {{ __('The Wish List') }}
+                </flux:heading>
 
-            <flux:text class="mt-1 max-w-prose text-oat-700 dark:text-oat-300">
-                {{ __('Everything we need before the baby arrives. Tick anything you would like to buy so nobody doubles up.') }}
-            </flux:text>
+                <flux:text class="mt-1 max-w-prose text-oat-700 dark:text-oat-300">
+                    {{ __('Everything we need before the baby arrives. Tick anything you would like to buy so nobody doubles up.') }}
+                </flux:text>
+            </div>
+
+            {{-- Kept outside the block that folds away on scroll, so it stays in reach. --}}
+            <x-appearance-toggle class="-me-1 -mt-1" />
         </div>
 
         <div class="mt-4 flex items-baseline justify-between gap-3">

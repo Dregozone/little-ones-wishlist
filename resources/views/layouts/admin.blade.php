@@ -12,8 +12,7 @@
     <head>
         @include('partials.head')
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
+        @include('partials.appearance')
     </head>
     <body class="wl-theme min-h-svh bg-oat-100 text-oat-900 antialiased dark:bg-oat-950 dark:text-oat-100">
         <a

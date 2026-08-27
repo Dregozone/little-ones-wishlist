@@ -39,6 +39,8 @@
                 </div>
 
                 <div class="ms-auto flex shrink-0 items-center gap-2">
+                    <x-appearance-toggle />
+
                     <flux:button
                         :href="route('home')"
                         icon="arrow-top-right-on-square"

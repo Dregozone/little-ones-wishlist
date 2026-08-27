@@ -1,17 +1,15 @@
 {{--
     Public shell for the wishlist.
 
-    Unlike the authenticated shell this does not hardcode `class="dark"`: guests arrive from
-    a shared link with no say in the matter, so the page follows whatever their device asks
-    for via @fluxAppearance.
+    Appearance is settled by partials.appearance rather than hardcoded here: a guest who
+    has not chosen gets dark, and the sun/moon switch in the header is theirs to change.
 --}}
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         @include('partials.head')
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="theme-color" content="#FBF8F3" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1A1815" media="(prefers-color-scheme: dark)" />
+        @include('partials.appearance')
     </head>
     <body class="wl-theme min-h-svh bg-oat-100 text-oat-900 antialiased dark:bg-oat-950 dark:text-oat-100">
         <a

@@ -245,3 +245,10 @@ test('the standalone manager keeps a way out to the list and the account', funct
         ->assertSee(route('profile.edit'))
         ->assertSee(route('logout'));
 });
+
+test('the manager carries the same light and dark switch as the list', function () {
+    $content = $this->get(route('admin.items'))->assertOk()->getContent();
+
+    expect($content)->toContain('data-test="appearance-toggle"')
+        ->toContain("window.localStorage.getItem('flux.appearance') ?? 'dark'");
+});

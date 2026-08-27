@@ -107,4 +107,25 @@ document.addEventListener('alpine:init', () => {
             }
         },
     }))
+
+    /**
+     * Sun and moon switch.
+     *
+     * Flux owns the preference itself — `$flux.dark` writes `flux.appearance` and puts the
+     * `dark` class on the document. All this adds is keeping the browser's own chrome in
+     * step, read straight off the page so the two never drift apart.
+     */
+    window.Alpine.data('appearanceToggle', () => ({
+        toggle() {
+            this.$flux.dark = !this.$flux.dark
+
+            this.$nextTick(() => {
+                const meta = document.querySelector('meta[name="theme-color"]')
+
+                if (meta) {
+                    meta.content = getComputedStyle(document.body).backgroundColor
+                }
+            })
+        },
+    }))
 })

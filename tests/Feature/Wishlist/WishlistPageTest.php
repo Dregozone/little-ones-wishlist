@@ -139,3 +139,14 @@ test('the page never leaks who claimed an item', function () {
         ->not->toContain('a-secret-guest-token-value')
         ->not->toContain('guest_id');
 });
+
+test('the list carries a light and dark switch that opens dark by default', function () {
+    $content = $this->withCookie(EnsureGuestHasVerified::COOKIE, '1')
+        ->get(route('home'))
+        ->assertOk()
+        ->getContent();
+
+    expect($content)->toContain('data-test="appearance-toggle"')
+        // An unresolved "system" is settled in favour of dark before the first paint.
+        ->toContain("window.localStorage.getItem('flux.appearance') ?? 'dark'");
+});
