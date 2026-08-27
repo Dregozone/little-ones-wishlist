@@ -13,7 +13,7 @@
 @endphp
 
 <td class="p-3 text-{{ $align }} max-sm:flex max-sm:items-baseline max-sm:justify-between max-sm:gap-3 max-sm:p-0 max-sm:text-start">
-    <span class="text-xs font-medium text-neutral-500 sm:hidden dark:text-neutral-400">{{ $label }}</span>
+    <span class="text-xs font-medium text-oat-600 sm:hidden dark:text-oat-400">{{ $label }}</span>
 
     @if ($isEditing)
         {{--
@@ -40,7 +40,7 @@
         <button
             type="button"
             wire:click="edit({{ $item->id }}, '{{ $field }}')"
-            class="-mx-2 min-h-11 w-full rounded-md px-2 text-{{ $align }} hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent max-sm:w-auto max-sm:text-end dark:hover:bg-neutral-800"
+            class="-mx-2 min-h-11 w-full rounded-md px-2 text-{{ $align }} hover:bg-oat-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sage-600 max-sm:w-auto max-sm:text-end dark:hover:bg-oat-800"
             data-test="cell-{{ $key }}"
         >
             <span class="sr-only">{{ __('Edit :field:', ['field' => $label]) }}</span>

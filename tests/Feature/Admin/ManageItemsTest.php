@@ -229,3 +229,19 @@ test('the manager shows that an item is claimed but never who claimed it', funct
 
     expect($item->claim)->not->toBeNull();
 });
+
+test('the manager stands alone rather than sitting in the sidebar shell', function () {
+    $content = $this->get(route('admin.items'))->assertOk()->getContent();
+
+    expect($content)->toContain('id="admin-content"')
+        ->not->toContain('data-flux-sidebar')
+        ->not->toContain('data-test="sidebar-menu-button"');
+});
+
+test('the standalone manager keeps a way out to the list and the account', function () {
+    $this->get(route('admin.items'))
+        ->assertOk()
+        ->assertSee(route('home'))
+        ->assertSee(route('profile.edit'))
+        ->assertSee(route('logout'));
+});
