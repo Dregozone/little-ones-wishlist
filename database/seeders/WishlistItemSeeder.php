@@ -18,7 +18,7 @@ class WishlistItemSeeder extends Seeder
      *
      * @var list<array{name: string, shop_name: string, price_pennies: int, description: string}>
      */
-    private const ITEMS = [
+    private const array ITEMS = [
         ['name' => 'Cot Mobile', 'shop_name' => 'JoJo Maman Bébé', 'price_pennies' => 2400, 'description' => 'Soft grey felt stars and clouds, plays a gentle lullaby.'],
         ['name' => 'Foam Play Mat', 'shop_name' => 'IKEA', 'price_pennies' => 900, 'description' => 'Interlocking foam tiles in oatmeal and sage.'],
         ['name' => 'Baby Bath Kit', 'shop_name' => 'Boots', 'price_pennies' => 1800, 'description' => 'Bath support, hooded towel and fragrance-free wash.'],

@@ -19,14 +19,14 @@ class VerifyParentNames
      *
      * @var list<string>
      */
-    private const ACCEPTED = ['emma', 'anders', 'learmonth'];
+    private const array ACCEPTED = ['emma', 'anders', 'learmonth'];
 
     /**
      * Words people naturally use to join two names, which carry no meaning here.
      *
      * @var list<string>
      */
-    private const JOINERS = ['and', 'plus', 'n'];
+    private const array JOINERS = ['and', 'plus', 'n'];
 
     /**
      * Determine whether the given answer identifies the family.

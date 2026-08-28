@@ -27,7 +27,7 @@ class ManageCookieConsent
     /**
      * The session key mirroring the decision for the current session.
      */
-    private const SESSION_KEY = 'wl_consent';
+    private const string SESSION_KEY = 'wl_consent';
 
     /**
      * Whether the guest has made a decision either way.
